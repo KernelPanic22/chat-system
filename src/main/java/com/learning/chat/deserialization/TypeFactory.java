@@ -1,5 +1,8 @@
 package com.learning.chat.deserialization;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class TypeFactory {
     public <T> T createInstance(Class<T> clazz) {
         try {

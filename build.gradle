@@ -37,7 +37,7 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
     //redis
-    implementation("org.springframework.boot:spring-boot-starter-data-redis:4.0.0")
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
 
     // Testing
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

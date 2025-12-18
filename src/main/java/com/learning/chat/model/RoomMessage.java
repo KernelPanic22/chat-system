@@ -15,15 +15,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RoomMessage {
-    @FixedTag(tag = MessageConstants.ROOM_NAME_TAG, delimiter = MessageConstants.DELIMITER)
+
+    private String sender;
     private String roomName;
-
-    @FixedTag(tag = MessageConstants.ROOM_ID_TAG, delimiter = MessageConstants.DELIMITER)
     private String roomId;
-
-    @FixedTag(tag = MessageConstants.TYPE_TAG, delimiter = MessageConstants.DELIMITER)
     private MessageType type;
-
-    @FixedTag(tag = MessageConstants.MSG_CONTENT , delimiter = MessageConstants.DELIMITER)
     private String messageContent;
 }

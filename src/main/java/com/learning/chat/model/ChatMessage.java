@@ -16,12 +16,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ChatMessage {
-    @FixedTag(tag = MessageConstants.CONTENT_TAG, delimiter = MessageConstants.DELIMITER)
     private String content;
-
-    @FixedTag(tag = MessageConstants.SENDER_TAG, delimiter = MessageConstants.DELIMITER)
     private String sender;
-
-    @FixedTag(tag = MessageConstants.TYPE_TAG, delimiter = MessageConstants.DELIMITER)
     private MessageType type;
 }

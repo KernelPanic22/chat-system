@@ -21,11 +21,10 @@ public class ChatController {
 
     @MessageMapping("/chat.send")
     @SendTo("/topic/public")
-    public ChatMessage sendMessage(@Payload String message) {
-        ChatMessage chatMessage = mapper.deserialize(message, ChatMessage.class);
-        return chatMessageHandlingFactory.getStrategy(chatMessage.getType())
+    public ChatMessage sendMessage(@Payload ChatMessage message) {
+        return chatMessageHandlingFactory.getStrategy(message.getType())
                 .orElseThrow(() -> new IllegalArgumentException("Unsupported message type"))
-                .handleMessage(chatMessage);
+                .handleMessage(message);
     }
 
 }
