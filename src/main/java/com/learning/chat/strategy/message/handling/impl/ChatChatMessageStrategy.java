@@ -2,13 +2,13 @@ package com.learning.chat.strategy.message.handling.impl;
 
 import com.learning.chat.model.ChatMessage;
 import com.learning.chat.model.enums.MessageType;
-import com.learning.chat.strategy.message.handling.MessageHandlingStrategy;
+import com.learning.chat.strategy.message.handling.ChatMessageHandlingStrategy;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-public class ChatMessageStrategy implements MessageHandlingStrategy {
+public class ChatChatMessageStrategy implements ChatMessageHandlingStrategy {
 
     @Override
     public ChatMessage handleMessage(ChatMessage message) {

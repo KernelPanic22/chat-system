@@ -2,7 +2,7 @@ package com.learning.chat.controller;
 
 import com.learning.chat.deserialization.StructuredMapper;
 import com.learning.chat.model.ChatMessage;
-import com.learning.chat.strategy.message.handling.MessageHandlingFactory;
+import com.learning.chat.strategy.message.handling.ChatMessageHandlingFactory;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -11,11 +11,11 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class ChatController {
 
-    private final MessageHandlingFactory messageHandlingFactory;
+    private final ChatMessageHandlingFactory chatMessageHandlingFactory;
     private final StructuredMapper mapper;
 
-    public ChatController(MessageHandlingFactory messageHandlingFactory, StructuredMapper mapper) {
-        this.messageHandlingFactory = messageHandlingFactory;
+    public ChatController(ChatMessageHandlingFactory chatMessageHandlingFactory, StructuredMapper mapper) {
+        this.chatMessageHandlingFactory = chatMessageHandlingFactory;
         this.mapper = mapper;
     }
 
@@ -23,7 +23,7 @@ public class ChatController {
     @SendTo("/topic/public")
     public ChatMessage sendMessage(@Payload String message) {
         ChatMessage chatMessage = mapper.deserialize(message, ChatMessage.class);
-        return messageHandlingFactory.getStrategy(chatMessage.getType())
+        return chatMessageHandlingFactory.getStrategy(chatMessage.getType())
                 .orElseThrow(() -> new IllegalArgumentException("Unsupported message type"))
                 .handleMessage(chatMessage);
     }
