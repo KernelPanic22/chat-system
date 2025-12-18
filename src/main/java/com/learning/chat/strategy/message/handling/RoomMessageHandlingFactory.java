@@ -9,11 +9,11 @@ import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
-public class MessageHandlingFactory {
+public class RoomMessageHandlingFactory {
 
-    private final Set<MessageHandlingStrategy> strategies;
+    private final Set<RoomMessageHandlingStrategy> strategies;
 
-    public Optional<MessageHandlingStrategy> getStrategy(MessageType messageType) {
+    public Optional<RoomMessageHandlingStrategy> getStrategy(MessageType messageType) {
         return strategies.stream()
                 .filter(strategy -> strategy.supports(messageType))
                 .findFirst();

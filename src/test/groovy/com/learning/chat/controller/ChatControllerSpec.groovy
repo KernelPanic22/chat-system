@@ -3,19 +3,17 @@ package com.learning.chat.controller
 import com.learning.chat.deserialization.StructuredMapper
 import com.learning.chat.model.ChatMessage
 import com.learning.chat.model.enums.MessageType
-import com.learning.chat.strategy.message.handling.MessageHandlingFactory
-import com.learning.chat.strategy.message.handling.MessageHandlingStrategy
-import org.junit.jupiter.api.Test
+import com.learning.chat.strategy.message.handling.ChatMessageHandlingFactory
+import com.learning.chat.strategy.message.handling.ChatMessageHandlingStrategy
 import org.spockframework.spring.SpringBean
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
 
-@ContextConfiguration(classes = [ChatController, MessageHandlingFactory, StructuredMapper])
+@ContextConfiguration(classes = [ChatController, ChatMessageHandlingFactory, StructuredMapper])
 class ChatControllerSpec extends Specification {
 
     @SpringBean
-    MessageHandlingFactory messageHandlingFactory = Stub()
+    ChatMessageHandlingFactory messageHandlingFactory = Stub()
     @SpringBean
     StructuredMapper mapper = Stub()
     @SpringBean
@@ -34,7 +32,7 @@ class ChatControllerSpec extends Specification {
                 .sender("alice")
                 .type(MessageType.CHAT)
                 .build()
-        def strategy = Mock(MessageHandlingStrategy)
+        def strategy = Mock(ChatMessageHandlingStrategy)
         def handledMessage = ChatMessage.builder()
                 .content("hello")
                 .sender("alice")
@@ -80,7 +78,7 @@ class ChatControllerSpec extends Specification {
                 .sender("charlie")
                 .type(MessageType.JOIN)
                 .build()
-        def strategy = Mock(MessageHandlingStrategy)
+        def strategy = Mock(ChatMessageHandlingStrategy)
 
         mapper.deserialize(rawMessage, _ as Class) >> joinMessage
         messageHandlingFactory.getStrategy(MessageType.JOIN) >> Optional.of(strategy)
